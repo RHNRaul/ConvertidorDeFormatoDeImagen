@@ -2,7 +2,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.rhn</groupId>
   <artifactId>convertidor-img</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
+  <version>1.0-SNAPSHOT</version>
   <name>convertidor de imagenes en java</name>
   <description>Un pequeño proyecto que quiese hacer ante la necesidad de convertir varias imagenes desde mi ordenador.</description>
 </project>
