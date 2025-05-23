@@ -9,7 +9,7 @@ public class NuevoConvertidorPrueba {
 		Manejador manejador = new Manejador();
 		try {
 			//manejador.convertirArchivo("C:\\Users\\PC\\Downloads\\Emperatriz.jfif", "jpg");
-			manejador.convertirArchivos("C:\\Users\\PC\\Documents\\Videos\\Espada", "jpg");
+			manejador.convertirArchivos("C:\\Users\\PC\\Documents\\Videos\\Eldrich ruca", "jpg");
 		} catch (BuscadorException | ConvertidorException | SalidaException e) {
 			e.printStackTrace();
 		}

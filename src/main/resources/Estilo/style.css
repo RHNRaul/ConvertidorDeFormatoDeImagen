@@ -1,0 +1,37 @@
+#stackPanePrincipal{
+    -fx-background-color: transparent; /* Fondo transparente */
+    -fx-pref-width: 800px; /* Ancho preferido */
+    -fx-pref-height: 600px; /* Alto preferido */
+    -fx-max-width: 800px; /* Ancho preferido */
+    -fx-max-height: 600px; /* Alto preferido */
+    -fx-min-width: 800px; /* Ancho preferido */
+    -fx-min-height: 600px; /* Alto preferido */
+}
+
+
+#hBoxPrincipal{
+	-fx-pref-width:100%;
+	-fx-pref-height:100%;
+}
+
+#stackPaneIzquierdo{
+	-fx-background-color: red; /* Fondo transparente */
+	-fx-pref-width: 40%;
+	-fx-pref-height: 100%;
+}
+#stackPaneDerecho{
+	-fx-background-color: green; /* Fondo transparente */
+	-fx-pref-width: 60%;
+	-fx-pref-height: 100%;
+}
+#vBoxDerecho{
+	-fx-background-color: green; /* Color de fondo */
+}
+
+Label{
+	-fx-font-size: 24px;
+	-fx-font-family: "Arial"; /* Font family */
+    -fx-text-fill: white; /* Text color */
+    -fx-font-weight: bold; /* Texto en negrita */
+    -fx-padding: 10px; /* Espaciado interno */
+}

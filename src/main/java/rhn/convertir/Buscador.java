@@ -33,9 +33,9 @@ public class Buscador {
 			throw new BuscadorException("El archivo no existe en la ruta especificada.",new NullPointerException());
 		}
 		
-		if(!file.getName().matches(ExpresionRegular.regex.getExpresion())) {
-			throw new BuscadorException("El archivo es una imagen invalida.");
-		}
+//		if(!file.getName().matches(ExpresionRegular.regex.getExpresion())) {
+//			throw new BuscadorException("El archivo es una imagen invalida.");
+//		}
 		return file;
 	}
 	

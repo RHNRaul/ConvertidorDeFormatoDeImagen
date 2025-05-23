@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import org.controlsfx.control.ToggleSwitch?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.collections.FXCollections?>
+<?import java.lang.String?>
+
+
+<StackPane xmlns:fx="http://javafx.com/fxml/1" fx:controller="rhn.controlador.PantallaFXMLController" fx:id="stackPanePrincipal" stylesheets="@../Estilo/style.css">
+<GridPane fx:id="gridPanePrincipal">
+    <columnConstraints>
+        <ColumnConstraints percentWidth="40"/>
+        <ColumnConstraints percentWidth="60"/>
+    </columnConstraints>
+    <rowConstraints>
+        <RowConstraints percentHeight="100"/>
+    </rowConstraints>
+    <StackPane fx:id="stackPaneIzquierdo" GridPane.columnIndex="0">
+        <VBox spacing="5">
+            <Label text="Convertidor" alignment="center" VBox.vgrow="ALWAYS" maxWidth="Infinity"/>
+            <Label text="Selecciona modo" alignment="center" VBox.vgrow="ALWAYS" maxWidth="Infinity"/>
+            <ToggleSwitch fx:id="switchModo" text="Por Imagen" selected="false"/>
+            <Label text="Selecciona el archivo" fx:id="lblSelecciona" VBox.vgrow="ALWAYS" maxWidth="Infinity"/>
+            <Button fx:id="btnSeleccionaArchivo" text="Seleccionar Archivo" maxWidth="Infinity"/>
+            <Label text="Selecciona el formato" VBox.vgrow="ALWAYS" maxWidth="Infinity"/>
+            <ComboBox fx:id="cmbFormato" maxWidth="Infinity" value="PNG">
+                <items>
+                    <FXCollections fx:factory="observableArrayList">
+                        <String fx:value="png"/>
+                        <String fx:value="jpg"/>
+                    </FXCollections>
+                </items>
+            </ComboBox>
+            <Button fx:id="btnConvertir" text="Convertir" maxWidth="Infinity"/>   
+        </VBox>
+    </StackPane>
+    <StackPane fx:id="stackPaneDerecho" GridPane.columnIndex="1">
+        <Label text="Panel Derecho"/>
+    </StackPane>
+</GridPane>
+</StackPane>
