@@ -2,6 +2,9 @@ package rhn.convertir;
 
 import java.io.File;
 import java.io.FilenameFilter;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import rhn.exceptions.BuscadorException;
 
@@ -17,6 +20,38 @@ public class Buscador {
 			buscador = new Buscador();
 		}
 		return buscador;
+	}
+	
+	
+	public List<File> listaArchivos(String unaRuta) throws BuscadorException {
+		ArrayList<File> lista = new ArrayList<>();
+		
+		if(unaRuta == null || unaRuta.isEmpty()) {
+			throw new BuscadorException("La ruta del directorio no puede ser nula o vacía.",new NullPointerException());
+		}
+		File folder = new File(unaRuta);
+		if(!folder.exists()) {
+			throw new BuscadorException("El directorio no existe en la ruta especificada.",new NullPointerException());
+		}
+		if(folder.isFile()) {
+			lista.add(folder);
+		}
+		if(folder.isDirectory()) {
+			File[] listaDeArchivos = folder.listFiles(new FilenameFilter() {
+				@Override
+				public boolean accept(File dir, String name) {
+					return name.matches(ExpresionRegular.regex.getExpresion());
+				}
+			});
+			
+			if(listaDeArchivos == null || listaDeArchivos.length == 0) {
+				throw new BuscadorException("No hay archivos en el directorio especificado.",new NullPointerException());
+			}
+			for(File file : listaDeArchivos) {
+				lista.add(file);
+			}
+		}		
+		return lista;
 	}
 	
 	

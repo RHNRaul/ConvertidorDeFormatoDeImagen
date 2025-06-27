@@ -15,18 +15,36 @@
 }
 
 #stackPaneIzquierdo{
-	-fx-background-color: red; /* Fondo transparente */
+	-fx-background-color: black; /* Fondo transparente */
 	-fx-pref-width: 40%;
 	-fx-pref-height: 100%;
 }
 #stackPaneDerecho{
-	-fx-background-color: green; /* Fondo transparente */
+	-fx-background-color: white; /* Fondo transparente */
 	-fx-pref-width: 60%;
 	-fx-pref-height: 100%;
 }
 #vBoxDerecho{
-	-fx-background-color: green; /* Color de fondo */
+	-fx-background-color: transparent; /* Color de fondo */
 }
+
+.scroll-pane {
+    -fx-background-color: transparent; /* Fondo transparente */
+    -fx-padding: 0; /* Espaciado interno */
+    -fx-border-color: transparent; /* Sin borde */
+}
+
+.scroll-pane .viewport {
+    -fx-padding: 0;
+}
+
+.scroll-pane .scroll-bar:horizontal,
+.scroll-pane .scroll-bar:vertical {
+    -fx-opacity: 0;
+    -fx-pref-width: 0;
+    -fx-pref-height: 0;
+}
+
 
 Label{
 	-fx-font-size: 24px;

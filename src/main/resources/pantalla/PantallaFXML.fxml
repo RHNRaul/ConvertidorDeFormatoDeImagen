@@ -12,6 +12,8 @@
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.collections.FXCollections?>
 <?import java.lang.String?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.VBox?>
 
 
 <StackPane xmlns:fx="http://javafx.com/fxml/1" fx:controller="rhn.controlador.PantallaFXMLController" fx:id="stackPanePrincipal" stylesheets="@../Estilo/style.css">
@@ -31,11 +33,12 @@
             <Label text="Selecciona el archivo" fx:id="lblSelecciona" VBox.vgrow="ALWAYS" maxWidth="Infinity"/>
             <Button fx:id="btnSeleccionaArchivo" text="Seleccionar Archivo" maxWidth="Infinity"/>
             <Label text="Selecciona el formato" VBox.vgrow="ALWAYS" maxWidth="Infinity"/>
-            <ComboBox fx:id="cmbFormato" maxWidth="Infinity" value="PNG">
+            <ComboBox fx:id="cmbFormato" maxWidth="Infinity" value="png">
                 <items>
                     <FXCollections fx:factory="observableArrayList">
                         <String fx:value="png"/>
                         <String fx:value="jpg"/>
+                        <String fx:value="jpeg"/>
                     </FXCollections>
                 </items>
             </ComboBox>
@@ -43,7 +46,9 @@
         </VBox>
     </StackPane>
     <StackPane fx:id="stackPaneDerecho" GridPane.columnIndex="1">
-        <Label text="Panel Derecho"/>
+       <ScrollPane fx:id="scrollPaneDerecho">
+           <VBox fx:id="vboxDerecho" spacing="10" />
+       </ScrollPane>
     </StackPane>
 </GridPane>
 </StackPane>

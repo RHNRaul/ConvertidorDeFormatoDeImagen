@@ -10,7 +10,7 @@ public class NuevoConvertidorPrueba {
 		try {
 			//manejador.convertirArchivo("C:\\Users\\PC\\Downloads\\Emperatriz.jfif", "jpg");
 			manejador.convertirArchivos("C:\\Users\\PC\\Documents\\Videos\\Eldrich ruca", "jpg");
-		} catch (BuscadorException | ConvertidorException | SalidaException e) {
+		} catch (ConvertidorException | SalidaException e) {
 			e.printStackTrace();
 		}
 	}

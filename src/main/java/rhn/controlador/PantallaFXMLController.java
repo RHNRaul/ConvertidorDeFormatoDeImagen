@@ -1,9 +1,11 @@
 package rhn.controlador;
 
 import java.io.File;
+import java.util.List;
 
 import org.controlsfx.control.ToggleSwitch;
 
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -13,12 +15,19 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import rhn.exceptions.BuscadorException;
+import rhn.exceptions.GenerarPreviewsException;
 import rhn.manejador.Manejador;
+import rhn.utilFX.GenerarPreviews;
 
 public class PantallaFXMLController {
 
@@ -30,6 +39,10 @@ public class PantallaFXMLController {
 	StackPane stackPaneIzquierdo;
 	@FXML
 	StackPane stackPaneDerecho;
+	@FXML
+	ScrollPane scrollPaneDerecho;
+	@FXML
+	VBox vboxDerecho;
 	@FXML
 	ToggleSwitch switchModo;
 	@FXML
@@ -98,6 +111,45 @@ public class PantallaFXMLController {
 		alerta.showAndWait();
 	}
 
+	private void cargaPreview() {
+		Manejador manejador = Manejador.getInstance();
+		if (rutaArchivo == null || rutaArchivo.isEmpty()) {
+			lanzaAlert(AlertType.ERROR, "Error", "No hay archivo o carpeta seleccionada");
+			return;
+		}
+			try {
+				manejador.buscarArchivos(rutaArchivo);
+				GenerarPreviews gp = GenerarPreviews.getInstance();
+				Platform.runLater(() -> {
+					try {
+						cargarImagenesPreview(gp.obtenerImages(manejador.getListaArchivos()));
+					} catch (GenerarPreviewsException e) {
+						e.printStackTrace();
+					}
+				});
+			} catch (BuscadorException e) {
+				e.printStackTrace();
+				lanzaAlert(AlertType.ERROR, "Error", "No se ha podido cargar la carpeta o archivo: " + rutaArchivo);
+			}	
+	}
+
+	private void cargarImagenesPreview(List<Image> imagenes) {
+		if(imagenes == null || imagenes.isEmpty()) {
+			lanzaAlert(AlertType.INFORMATION, "Información", "No se han encontrado imágenes en la carpeta o archivo seleccionado.");
+			return;
+		}
+		if(vboxDerecho.getChildren().size() > 0) {
+			vboxDerecho.getChildren().clear();
+		}
+		for(Image imagen : imagenes) {
+			ImageView imageview = new ImageView(imagen);
+			imageview.setPreserveRatio(false);
+			imageview.fitWidthProperty().bind(scrollPaneDerecho.widthProperty());
+			imageview.fitHeightProperty().bind(scrollPaneDerecho.heightProperty());
+			vboxDerecho.getChildren().add(imageview);
+		}
+	}
+	
 	private void events() {
 		switchModo.setOnMouseClicked(event -> {
 			if (switchModo.isSelected()) {
@@ -113,16 +165,18 @@ public class PantallaFXMLController {
 				DirectoryChooser directoryChooser = new DirectoryChooser();
 				directoryChooser.setTitle("Seleccionar carpeta");
 				File carpetaSeleccionada = directoryChooser.showDialog(escena);
-				if(carpetaSeleccionada != null)
-				rutaArchivo = carpetaSeleccionada.getAbsolutePath();
+				if (carpetaSeleccionada != null)
+					rutaArchivo = carpetaSeleccionada.getAbsolutePath();
+				cargaPreview();
 			} else {
 				FileChooser fileChooser = new FileChooser();
 				fileChooser.setTitle("Seleccionar archivo");
 				fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Imágenes", "*.png", "*.jpg",
 						"*.jpeg", "*.gif", "*.jfif", "*.bmp", "*.webp", "*.tiff"));
 				File archivoSeleccionado = fileChooser.showOpenDialog(escena);
-				if(archivoSeleccionado != null)
-				rutaArchivo = archivoSeleccionado.getAbsolutePath();
+				if (archivoSeleccionado != null)
+					rutaArchivo = archivoSeleccionado.getAbsolutePath();
+				cargaPreview();
 			}
 		});
 		btnConvertir.setOnMouseClicked(event -> {

@@ -17,7 +17,7 @@ public class Salida {
 	
 	public static void salidaLocalUnico(String direccion,String nombreArchivo, String formato, BufferedImage imagen) throws SalidaException {
 		try {
-	        File outputfile = new File(direccion, eliminaExtension(nombreArchivo) + "Convertido");			
+	        File outputfile = new File(direccion, eliminaExtension(nombreArchivo) + "Convertido." + formato);			
 	        ImageIO.write(imagen, formato, outputfile);
 		} catch (IOException e) {
 			throw new SalidaException("Error al guardar la imagen: " + nombreArchivo, e);
@@ -31,7 +31,7 @@ public class Salida {
 	            directorio.mkdirs();
 	            estaCreado.set(true);
 	        } 
-	        File outputfile = new File(directorio, eliminaExtension(nombreArchivo));			
+	        File outputfile = new File(directorio, eliminaExtension(nombreArchivo)+"."+formato);			
 	        ImageIO.write(imagen, formato, outputfile);
 		} catch (IOException e) {
 			throw new SalidaException("Error al guardar la imagen: " + nombreArchivo, e);
